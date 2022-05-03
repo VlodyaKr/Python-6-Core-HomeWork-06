@@ -4,6 +4,7 @@ import sys
 import file_parser as parser
 from normalize import normalize
 
+# Сортуємо лише по типам файлів (True), чи по типам та розширенням (по замовчуванню)
 NOEXT = False
 
 def handle_file(filename: Path, target_folder: Path):
@@ -14,7 +15,7 @@ def handle_file(filename: Path, target_folder: Path):
 def handle_archive(filename: Path, target_folder: Path):
     # Создаем папку для архивов
     target_folder.mkdir(exist_ok=True, parents=True)
-    #  Создаем папку куда распаковываем архив
+    # Создаем папку куда распаковываем архив
     # Берем суффикс у файла и убираем replace(filename.suffix, '')
     folder_for_file = target_folder / \
         normalize(filename.name.replace(filename.suffix, ''))
@@ -25,7 +26,7 @@ def handle_archive(filename: Path, target_folder: Path):
         shutil.unpack_archive(str(filename.resolve()),
                               str(folder_for_file.resolve()))
     except shutil.ReadError:
-        print(f'Обман - это не архив {filename}!')
+        print(f'Обман - це не архів {filename}!')
         folder_for_file.rmdir()
         return None
     filename.unlink()
@@ -35,7 +36,7 @@ def handle_folder(folder: Path):
     try:
         folder.rmdir()
     except OSError:
-        print(f'Не удалось удалить папку {folder}')
+        print(f'Не вдалося видалити папку {folder}')
 
 
 def main(folder: Path):
