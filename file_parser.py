@@ -6,13 +6,15 @@ AUDIO = []
 DOCUMENTS = []
 IMAGES = []
 VIDEO = []
+PROGRAMS = []
 OTHER = []
 
 REGISTER_EXTENSIONS = {
-    'JPEG': IMAGES, 'PNG': IMAGES, 'JPG': IMAGES, 'SVG': IMAGES,
-    'MP3': AUDIO, 'OGG': AUDIO, 'WAV': AUDIO, 'AMR': AUDIO,
-    'AVI': VIDEO, 'MP4': VIDEO, 'MOV': VIDEO, 'MKV': VIDEO,
-    'DOC': DOCUMENTS, 'DOCX': DOCUMENTS, 'TXT': DOCUMENTS, 'PDF': DOCUMENTS, 'XLSX': DOCUMENTS, 'PPTX': DOCUMENTS,
+    'JPEG': IMAGES, 'PNG': IMAGES, 'JPG': IMAGES, 'SVG': IMAGES, 'GIF': IMAGES, 'ICO': IMAGES,
+    'MP3': AUDIO, 'OGG': AUDIO, 'WAV': AUDIO, 'AMR': AUDIO, 'FLAC': AUDIO, 'WMA': AUDIO,
+    'AVI': VIDEO, 'MP4': VIDEO, 'MOV': VIDEO, 'MKV': VIDEO, 'WMV': VIDEO,
+    'DOC': DOCUMENTS, 'DOCX': DOCUMENTS, 'TXT': DOCUMENTS, 'PDF': DOCUMENTS, 'XLSX': DOCUMENTS, 'PPTX': DOCUMENTS, 'RTF': DOCUMENTS,
+    'BAT': PROGRAMS, 'CMD': PROGRAMS, 'EXE': PROGRAMS, 'C': PROGRAMS, 'CPP': PROGRAMS, 'JS': PROGRAMS, 'PY': PROGRAMS, 'VBS': PROGRAMS,
     'ZIP': ARCHIVES, 'GZ': ARCHIVES, 'TAR': ARCHIVES
 }
 
@@ -31,7 +33,7 @@ def scan(folder: Path) -> None:
         # Если это папка то добавляем ее с список FOLDERS и преходим к следующему элементу папки
         if item.is_dir():
             # проверяем, чтобы папка не была той в которую мы складываем уже файлы
-            if item.name not in ('archives', 'video', 'audio', 'documents', 'images', 'OTHER'):
+            if item.name not in ('archives', 'video', 'audio', 'documents', 'images', 'programs', 'OTHER'):
                 FOLDERS.append(item)
                 #  сканируем эту вложенную папку - рекурсия
                 scan(item)
@@ -64,6 +66,7 @@ if __name__ == '__main__':
     print(f'Audio: {AUDIO}')
     print(f'Video: {VIDEO}')
     print(f'Documents: {DOCUMENTS}')
+    print(f'Programs: {PROGRAM}')
     print(f'Archives: {ARCHIVES}')
     print(f'Others: {OTHER}')
 
