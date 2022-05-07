@@ -7,6 +7,7 @@ from normalize import normalize
 # Сортуємо лише по типам файлів (True), чи по типам та розширенням (по замовчуванню)
 NOEXT = False
 
+
 def handle_file(filename: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
     filename.replace(target_folder / (normalize(filename.stem) + filename.suffix))
